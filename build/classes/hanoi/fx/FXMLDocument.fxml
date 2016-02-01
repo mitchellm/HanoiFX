@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="564.9999000000025" prefWidth="1019.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="hanoi.fx.FXMLDocumentController">
+  <children>
+    <Pane fx:id="view" layoutX="14.0" layoutY="14.0" prefHeight="323.999755859375" prefWidth="772.0">
+      <children>
+        <Region layoutX="33.0" layoutY="14.0" onMouseClicked="#clickTowerA" prefHeight="288.0" prefWidth="203.0" />
+        <Region id="two" layoutX="285.0" layoutY="18.0" onMouseClicked="#clickTowerB" prefHeight="288.0" prefWidth="203.0" />
+        <Region id="three" layoutX="538.0" layoutY="18.0" onMouseClicked="#clickTowerC" prefHeight="288.0" prefWidth="203.0" />
+      </children>
+    </Pane>
+    <VBox layoutX="786.0" layoutY="14.0" prefHeight="323.999755859375" prefWidth="219.0">
+      <children>
+        <GridPane prefHeight="324.0" prefWidth="219.0">
+          <children>
+            <Button fx:id="construct" mnemonicParsing="false" onAction="#constructButton" prefHeight="37.0" prefWidth="93.0" text="Construct" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label prefHeight="37.0" prefWidth="86.0" text="# of DISCS =" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="nIn" prefWidth="200.0" text="3" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label prefWidth="93.0" text="START = " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label prefWidth="93.0" text="AUX = " GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Label prefWidth="93.0" text="DEST =" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <TextField fx:id="sIn" prefWidth="200.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="aIn" prefWidth="200.0" text="1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="dIn" prefWidth="200.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button id="dIn" fx:id="clear" mnemonicParsing="false" onAction="#clearButton" prefHeight="37.0" prefWidth="95.0" text="Clear" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Button fx:id="solve" mnemonicParsing="false" onAction="#solveButton" prefHeight="37.0" prefWidth="95.0" text="Solve" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button id="solve" mnemonicParsing="false" onAction="#stepButton" prefHeight="37.0" prefWidth="95.0" text="Step" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
+    </VBox>
+    <TextArea editable="false" layoutX="14.0" layoutY="338.0" prefHeight="79.0" prefWidth="991.0" text="A) You can click on a tower to select it, then click on a second to move the top disc from the first to the second tower.&#10;B) Auto-solve by clicking &quot;Solve&quot; (Won't work if you've moved the discs by clicking, clear and reconstruct to use auto-solve)&#10;C) Step through a puzzle's solution visually by clicking step over and over (Won't work if you've moved the discs by clicking, clear and reconstruct to use auto-solve)&#10;D) IMPORTANT: WHEN CONSTRUCTING IT MUST PRE-LOAD ALL MOVES, LARGE # OF DISCS WILL TAKE EXPONENTIALLY LONGER **" wrapText="true" />
+    <Label id="error" fx:id="output" layoutX="14.0" layoutY="427.0" prefWidth="991.0" text="" />
+    <GridPane layoutX="14.0" layoutY="482.0" prefWidth="991.0">
+      <children>
+        <Label prefWidth="299.0" text="MOVE FROM TOWER (FIRST TOWER CLICK)" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="selectedA" minWidth="5.9998779296875" prefHeight="23.0" prefWidth="173.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label prefWidth="239.0" text="MOVE TO TOWER (SECOND TOWER CLICK)" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <Label fx:id="selectedB" prefHeight="30.0" prefWidth="232.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        <Label text="# OF MOVES REQUIRED FOR THIS PUZZLE = " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label fx:id="movesNeeded" prefHeight="37.0" prefWidth="266.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="# OF MOVES MADE THUS FAR =" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Label fx:id="movesMade" prefHeight="60.0" prefWidth="351.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.0" minWidth="10.0" prefWidth="314.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="182.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="248.0" minWidth="10.0" prefWidth="248.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="247.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+</AnchorPane>
